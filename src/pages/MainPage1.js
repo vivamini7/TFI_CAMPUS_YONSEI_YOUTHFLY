@@ -14,34 +14,22 @@ function MainPage1({
   const selectedCategories = Array.isArray(filters?.categories)
     ? filters.categories
     : [];
-  const selectedLocation = filters?.location || null; // address 말고 location 사용
 
+  // 👉 추천 리스트용 데이터 (filters 기준)
   // 👉 추천 리스트용 데이터 (filters 기준)
   const filteredPlaces = (places || [])
     .filter((item) => {
       const category = Array.isArray(item.category) ? item.category : [];
-
-      const area = item.area || "";
-      const location = item.location || "";
 
       // ✅ 카테고리 매칭: 하나라도 겹치면 통과
       const matchCategory =
         selectedCategories.length === 0 ||
         selectedCategories.some((c) => category.includes(c));
 
-      const gu = area
-        ? area.split(" ").find((x) => x.includes("구"))
-        : "";
-
-      const matchLocation =
-        !selectedLocation ||
-        (gu && gu.includes(selectedLocation)) ||
-        area.includes(selectedLocation) ||
-        location.includes(selectedLocation);
-
-      return matchCategory && matchLocation;
+      return matchCategory;   // ⬅ 위치 조건 제거!
     })
     .sort((a, b) => (b.score || 0) - (a.score || 0));
+
 
 
 
@@ -82,7 +70,7 @@ function MainPage1({
             const wingMarkerImage = new kakao.maps.MarkerImage(
               "/images/self-loc.png",
               new kakao.maps.Size(20, 20),
-              { offset: new kakao.maps.Point(20, 20) }
+              { offset: new kakao.maps.Point(35, 35) }
             );
 
             new kakao.maps.Marker({
