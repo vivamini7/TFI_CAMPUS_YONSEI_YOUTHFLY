@@ -81,7 +81,7 @@ function MainPage1({
             // 날개 마커 이미지 (public/images/wing-marker.png 준비!)
             const wingMarkerImage = new kakao.maps.MarkerImage(
               "/images/self-loc.png",
-              new kakao.maps.Size(100, 100),
+              new kakao.maps.Size(20, 20),
               { offset: new kakao.maps.Point(20, 20) }
             );
 
