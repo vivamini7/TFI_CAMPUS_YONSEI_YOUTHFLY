@@ -1,0 +1,273 @@
+/* ------------------------------ */
+/* 전체 디테일 페이지 레이아웃 */
+/* ------------------------------ */
+
+.detail-layout {
+  min-height: 100vh;
+  background-color: #fffdf6;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 상단바 아래 메인 컨텐츠: 왼쪽 카드 + 오른쪽 상세 */
+.detail-body {
+  flex: 1;
+  padding: 48px 80px;
+  display: grid;
+
+  /* 카드 + 텍스트 비율 더 넓게 */
+  grid-template-columns: minmax(360px, 460px) minmax(0, 1fr);
+
+  gap: 60px; /* 둘 사이 간격 유지 */
+  justify-content: center; /* 전체 묶음을 가운데 정렬 */
+
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+/* ------------------------------ */
+/* 왼쪽 카드 */
+/* ------------------------------ */
+.detail-left {
+  display: flex;
+  justify-content: center;   /* 카드 가로 중앙 정렬 (원하면 flex-start로 둬도 됨) */
+  align-items: flex-start;   /* ⬅️ 이게 제일 중요! 카드 높이 = 내용 높이만큼만 */
+}
+
+
+.detail-card {
+  margin-top:100px;
+  width: 100%;
+  border-radius: 20px;
+  border: 3px solid #ffd24a;
+  padding: 24px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 4px 10px #00000015;
+}
+
+/* 상단 태그 */
+.detail-card-tag-top {
+  margin-bottom: 6px;
+}
+
+.tag-pill {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background-color: #ffdc6a;
+  color: #4b3200;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* 이미지 — 크게 키움 */
+.detail-card-img {
+  width: 100%;
+  height: 340px; /* 이미지 크게 */
+  border-radius: 16px;
+  background-color: #f3f3f3;
+  background-image: linear-gradient(
+      135deg,
+      #e7e7e7 25%,
+      transparent 25%,
+      transparent 50%,
+      #e7e7e7 50%,
+      #e7e7e7 75%,
+      transparent 75%,
+      transparent
+  );
+  background-size: 28px 28px;
+}
+
+/* 카드 텍스트 */
+.detail-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.detail-card-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail-card-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+}
+
+.detail-card-gu {
+  font-size: 16px;
+  color: #7a5a1c;
+}
+
+.detail-card-price {
+  font-size: 17px;
+  font-weight: 600;
+  color: #000;
+}
+
+
+/* ------------------------------ */
+/* 오른쪽 상세 텍스트 */
+/* ------------------------------ */
+
+.detail-right {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center; /* 전체 가운데 정렬 */
+}
+
+/* 오른쪽 모든 요소는 최대폭 고정 + 중앙 */
+.detail-right > * {
+  width: 100%;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 제목 + link */
+.detail-heading-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail-heading {
+  font-size: 30px;
+  font-weight: 800;
+  color: #682D03;
+}
+
+.detail-link-btn {
+  border: none;
+  background: none;
+  color: #682D03;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* 위치/가격 */
+.detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  font-size: 16px;
+  color: #682D03;
+  font-weight: 600;
+}
+
+/* ------------------------------ */
+/* 노란 설명 박스 */
+/* ------------------------------ */
+
+.detail-box {
+  background-color: #ffeeb6;
+  border-radius: 20px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.detail-box-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail-box-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #4b3200;
+}
+
+.detail-box-arrow-btn {
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  color: #4b3200;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.detail-box-arrow-btn.expanded {
+  transform: rotate(180deg);
+}
+
+/* 3줄까지만 표시 */
+.detail-box-body {
+  font-size: 16px;
+  color: #4f3d1d;
+  line-height: 1.7;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+/* 펼쳐지면 전체표시 */
+.detail-box-body.expanded {
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+
+/* ------------------------------ */
+/* 태그 */
+.detail-category-label {
+  font-size: 15px;
+  color: #682D03;
+  font-weight: 600;
+}
+
+.detail-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* ------------------------------ */
+/* 캘린더 버튼 */
+.detail-calendar-btn {
+  padding: 14px 20px;
+  border-radius: 999px;
+  border: none;
+  background-color: #000;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+}
+
+.detail-calendar-btn:hover {
+  background-color: #222;
+}
+
+/* ------------------------------ */
+/* 반응형 */
+/* ------------------------------ */
+
+@media (max-width: 900px) {
+  .detail-body {
+    grid-template-columns: 1fr;
+    padding: 32px 20px;
+    gap: 32px;
+  }
+
+  .detail-card {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .detail-card-img {
+    height: 260px;
+  }
+}

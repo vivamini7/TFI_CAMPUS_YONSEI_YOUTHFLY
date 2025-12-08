@@ -1,0 +1,751 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background-color: #f2f2f2;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.card {
+  width: 360px;
+  max-width: 90vw;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 32px 28px 24px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.logo {
+  font-size: 32px;
+  margin-bottom: 24px;
+  font-weight: 800;
+  color : #682D03;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.label {
+  font-size: 13px;
+  text-align: left;
+  color: #444;
+}
+
+.input {
+  margin-top: 4px;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #333;
+}
+
+.button {
+  width: 100%;
+  margin-top: 18px;
+  padding: 10px 0;
+  border: none;
+  border-radius: 4px;
+  background: #222;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.link-button {
+  margin-top: 8px;
+  border: none;
+  background: none;
+  color: #666;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.category-text {
+  font-size: 13px;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.section-title {
+  margin-top: 12px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.chip-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.chip {
+  border-radius: 999px;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  background: #fafafa;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.chip--active {
+  background: #222;
+  color: #fff;
+  border-color: #222;
+}
+
+.select {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+/* ============================= */
+/* MainPage2 레이아웃            */
+/* ============================= */
+
+.main2-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #fafafa;
+}
+
+/* 상단바 */
+.main2-topbar {
+  height: 64px;
+  padding: 0 32px;
+  border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+}
+
+.main2-topbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.main2-logo {
+  display: flex;
+  align-items: center;
+  gap: 0px;           /* 글씨와 날개 사이 간격 */
+  background: none;   /* ✅ 노란 원 제거 */
+  border-radius: 0;   /* ✅ 둥근 테두리 제거 */
+  box-shadow: none;   /* 혹시 그림자 있으면 제거 */
+  color : #682D03;
+  font-weight: 800;
+  
+}
+
+/* YouthFly 글씨 스타일 */
+.main2-logo-text {
+  font-size: 30px;
+  font-weight: 700;
+  color: #6b3b1f;   /* 로고 이미지 색감이랑 맞춰서 조정해도 됨 */
+}
+
+/* 날개 이미지 스타일 */
+.main2-logo-wing {
+  margin-left: -30px;
+  margin-bottom: 15px;
+  height: 100px;      /* 로고 옆에 맞는 크기로 조절 */
+  width: auto;
+  object-fit: contain;
+}
+
+.main2-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.main2-text-btn {
+  border: none;
+  background: none;
+  color: #d9c046;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.main2-primary-btn {
+  border: none;
+  padding: 8px 20px;
+  border-radius: 999px;
+  background: #f3d54b;
+  color: #444;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.main2-user {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: #dddddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+/* 본문 레이아웃 */
+.main2-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
+  padding: 24px 32px;
+}
+
+/* 사이드바 */
+.main2-sidebar {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #f3d54b;
+  padding: 16px 18px;
+  font-size: 13px;
+}
+
+.main2-sidebar-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.main2-sidebar-title {
+  font-weight: 600;
+}
+
+.main2-chip-active {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #f3d54b;
+  font-size: 12px;
+}
+
+.main2-chip-close {
+  cursor: pointer;
+}
+
+.main2-filter-block {
+  margin-bottom: 18px;
+}
+
+.main2-filter-subtitle {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.main2-filter-range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.main2-range {
+  width: 100%;
+}
+
+.main2-checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.main2-checkbox-row input {
+  margin-top: 2px;
+}
+
+.main2-checkbox-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.main2-checkbox-desc {
+  font-size: 11px;
+  color: #777;
+}
+
+/* 오른쪽 콘텐츠 */
+.main2-content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 검색 바 */
+.main2-search-wrap {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid #f3d54b;
+  padding: 4px 10px;
+  margin-bottom: 20px;
+  background: #ffffff;
+  min-width: 260px;
+}
+
+.main2-search-input {
+  border: none;
+  outline: none;
+  font-size: 14px;
+  padding: 4px 6px;
+  flex: 1;
+}
+
+.main2-search-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* 카드 리스트 */
+.main2-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.main2-card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #f3d54b;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 이미지 감싸는 박스 */
+.main2-card-img-wrap {
+  position: relative;
+  width: 95%;
+  height: 180px;
+  border-radius: 10px;
+  overflow: hidden;
+
+  /* 카드 안에서 가로 중앙 정렬 */
+  margin: 0 auto;
+  margin-top: 3px;
+
+  /* 안쪽 내용(이미지)을 정중앙에 배치하고 싶다면 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main2-card-teen-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 4px 10px;
+  background-color: #ffe46b;   /* 부드러운 노란색 */
+  border-radius: 999px;        /* 둥근 캡슐 모양 */
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b3b1f;              /* 브라운 계열 텍스트 */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  white-space: nowrap;
+}
+
+
+/* 실제 이미지 */
+.main2-card-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: block;          /* inline 이미지 여백 제거 */
+  object-fit: cover;       /* 비율 유지하면서 꽉 채우기 */
+  align-items: center;
+}
+
+.main2-card-heart {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 26px;
+  height: 26px;
+  z-index: 2;
+  border-radius: 999px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.main2-card-info {
+  padding: 10px 12px 12px;
+  font-size: 13px;
+}
+
+.main2-card-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.main2-card-title {
+  font-weight: 1000;
+}
+
+.main2-card-location {
+  color: #666666;
+  font-size: 10px
+}
+
+.main2-card-price {
+  font-weight: 600;
+  font-size: 10px
+}
+
+.main2-card-tag {
+  font-size: 12px;
+  color: #666666;
+}
+/* ============================= */
+/* MainPage1 (지도 화면)         */
+/* ============================= */
+
+.main1-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #fafafa;
+}
+
+.main1-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 2.5fr 1fr; /* 왼쪽 지도 넓게, 오른쪽 패널 좁게 */
+  gap: 24px;
+  padding: 24px 32px;
+}
+
+.main1-map {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.main1-map-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  background: #e5e5e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #777;
+  font-size: 18px;
+}
+
+/* 오른쪽 패널 */
+.main1-panel {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  padding: 16px 18px;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+}
+
+.main1-panel-header {
+  margin-bottom: 12px;
+}
+
+.main1-panel-title {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.main1-panel-sub {
+  font-size: 12px;
+  color: #777;
+}
+
+.main1-panel-list {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 리스트 아이템 */
+.main1-item {
+  display: grid;
+  grid-template-columns: 28px 1fr 32px;
+  align-items: center;
+  padding: 8px 6px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.main1-item:hover {
+  background: #faf7e8;
+}
+
+.main1-item-left {
+  display: flex;
+  justify-content: center;
+}
+
+.main1-star {
+  font-size: 16px;
+  color: #f3d54b;
+}
+
+.main1-item-middle {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.main1-item-title {
+  font-weight: 500;
+}
+
+.main1-item-desc {
+  font-size: 12px;
+  color: #777;
+}
+
+.main1-item-right {
+  display: flex;
+  justify-content: center;
+  color: #999;
+  font-size: 12px;
+}
+
+/* 버튼 공통 */
+.topbar-btn-left,
+.topbar-btn-right {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 8px 20px;
+  margin-left: 8px;
+  border-radius: 999px;
+  color: #d9c046;
+  transition: 0.2s ease;
+}
+
+/* 선택(active) 되었을 때 → 노란색 */
+.topbar-btn-left.active,
+.topbar-btn-right.active {
+  background: #f3d54b;
+  color: black;
+  font-weight: 600;
+}
+
+/* 비활성 버튼은 텍스트 스타일 */
+.topbar-btn-left:not(.active),
+.topbar-btn-right:not(.active) {
+  background: none;
+  color: #d9c046;
+}
+
+/* ============================= */
+/* 상단 토글 (목록보기 / 지도)   */
+/* ============================= */
+
+.topbar-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background: #f7f0b5;      /* 연한 노랑 배경 */
+  border-radius: 999px;
+  padding: 3px;
+  min-width: 150px;
+}
+
+/* 움직이는 노란 알약 */
+.toggle-pill {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: calc(50% - 3px);
+  height: calc(100% - 6px);
+  border-radius: 999px;
+  background: #f3d54b;
+  transition: transform 0.25s ease;
+}
+
+/* 기본은 왼쪽(목록보기) */
+.toggle-left {
+  transform: translateX(0%);
+}
+
+/* 오른쪽(지도)일 때 */
+.toggle-right {
+  transform: translateX(100%);
+}
+
+/* 실제 클릭되는 버튼 */
+.toggle-btn {
+  position: relative;
+  z-index: 1; /* pill 위에 보이게 */
+  flex: 0 0 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  color: #a08a20;
+  transition: color 0.2s ease;
+}
+
+/* 활성 탭 텍스트 */
+.toggle-btn.active {
+  color: #000;
+  font-weight: 600;
+}
+
+.main2-select {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+/* 길면 ... 처리 */
+.ellipsis-title {
+  max-width: 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ellipsis-price {
+  max-width: 140px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ellipsis-tags {
+  max-width: 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* 본문 영역: 왼쪽 카드 + 오른쪽 설명 */
+.detail-body {
+  flex: 1;
+  padding: 32px 40px;
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  gap: 32px;
+}
+
+/* 왼쪽 카드 영역 */
+.detail-left {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.detail-card {
+  width: 100%;
+  border-radius: 16px;
+  border: 2px solid #ffd24a;
+  padding: 16px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 카드 상단 태그 */
+.detail-card-tag-top {
+  margin-bottom: 4px;
+}
+
+.tag-pill {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background-color: #ffdc6a;
+  color: #4b3200;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* 추천 리스트 제목 */
+.main1-item-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+}
+
+/* 추천 리스트 설명 */
+.main1-item-desc {
+  font-size: 15px;
+  color: #666;
+}
+
+/* 별 아이콘 */
+.main1-star {
+  font-size: 22px;
+  margin-right: 4px;
+}
+
+/* 점수 */
+.main1-score {
+  font-size: 15px;
+  color: #555;
+}
+.main1-map {
+  flex: 1;
+  padding: 16px;
+}
+
+.main1-map-container {
+  width: 100%;
+  height: 100%;
+  min-height: 400px; /* 지도 세로 높이 */
+  border-radius: 16px;
+  overflow: hidden;
+}
