@@ -69,7 +69,7 @@ function MainPage1({
             // 날개 마커 이미지 (public/images/wing-marker.png 준비!)
             const wingMarkerImage = new kakao.maps.MarkerImage(
               "/images/self-loc.png",
-              new kakao.maps.Size(40, 40),
+              new kakao.maps.Size(31, 31),
               { offset: new kakao.maps.Point(35, 35) }
             );
 
@@ -99,7 +99,7 @@ function MainPage1({
     // 4) 마커 이미지 세팅 (🔴 추천 / 🔵 일반)
     const recoMarkerImage = new kakao.maps.MarkerImage(
       "/images/marker-reco.png", // 빨간 핀
-      new kakao.maps.Size(30, 40),
+      new kakao.maps.Size(30, 32),
       { offset: new kakao.maps.Point(15, 30) }
     );
     const normalMarkerImage = new kakao.maps.MarkerImage(
