@@ -1,82 +1,171 @@
-// src/pages/LoginPage.js
+// src/pages/DetailPage.js
 import React, { useState } from "react";
-import "./LoginPage.css";
+import "./DetailPage.css";
+import wingImg from "./wing.png";
 
-function LoginPage({ onLogin }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+// 장소 이름으로 이미지 경로 만들기
+const getImageSrc = (place) => {
+  if (!place || !place.name) return "/images/default.jpg";
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // TODO: 실제 로그인 검증 로직 넣기
-    if (onLogin) onLogin(); // 지금은 그냥 다음 페이지로 이동
-  };
+  const safeName = place.name;
+  return `/images/${safeName}.jpg`;
+};
+
+function DetailPage({ place, onBackToList, onBackToMap }) {
+  const [expanded, setExpanded] = useState(false);
+
+  if (!place) {
+    return (
+      <div style={{ padding: 24 }}>
+        <p>선택된 장소가 없습니다.</p>
+        <button onClick={onBackToList}>목록으로 돌아가기</button>
+      </div>
+    );
+  }
+
+  const gu = place.area
+    ? place.area.split(" ").find((x) => x.includes("구"))
+    : "";
+
+  const imageSrc = getImageSrc(place);
 
   return (
-    <div className="page">
-      {/* 햇살/빛 번짐 효과 */}
-      <div className="page-sun" />
-
-      <div className="card">
-        <div className="logo-wrap">
-          <div className="logo">YouthFly</div>
-          <p className="logo-subtitle">청소년을 위한 활동 탐색 서비스</p>
+    <div className="detail-layout">
+      {/* 상단 바 */}
+      <header className="main2-topbar">
+        <div className="main2-topbar-left">
+          <div
+            className="main2-logo"
+            onClick={onBackToMap}     // 🔥 로고 클릭 → 지도 화면
+            style={{ cursor: "pointer" }}
+          >
+            <span className="main2-logo-text">YouthFly</span>
+            <img
+              src={wingImg}
+              alt="YouthFly 날개 로고"
+              className="main2-logo-wing"
+            />
+          </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="form">
-          <label className="label">
-            Email
-            <input
-              type="email"
-              className="input"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="이메일을 입력하세요"
-              required
-            />
-          </label>
-
-          <label className="label">
-            Password
-            <input
-              type="password"
-              className="input"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="비밀번호를 입력하세요"
-              required
-            />
-          </label>
-
-          <div className="form-footer">
-            <label className="remember">
-              <input type="checkbox" />
-              <span>로그인 상태 유지</span>
-            </label>
-
+        <div className="main2-topbar-right">
+          <div className="topbar-toggle">
+            <div className="toggle-pill toggle-left" />
             <button
               type="button"
-              className="link-button"
-              onClick={() =>
-                alert("비밀번호 찾기 기능은 아직 준비 중이에요 🥲")
-              }
+              className="toggle-btn active"
+              onClick={onBackToList}
             >
-              Forgot password?
+              목록
+            </button>
+            <button
+              type="button"
+              className="toggle-btn"
+              onClick={onBackToMap}
+            >
+              지도
             </button>
           </div>
+        </div>
+      </header>
 
-          <button type="submit" className="button">
-            Login
+      {/* 본문 */}
+      <main className="detail-body">
+        {/* 왼쪽 카드 */}
+        <section className="detail-left">
+          <article className="detail-card">
+            <img
+              src={imageSrc}
+              alt={place.name}
+              className="detail-card-img"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "/images/default.jpg";
+              }}
+            />
+
+            <div className="detail-card-info">
+              <div className="detail-card-title-row">
+                <span className="detail-card-name">{place.name}</span>
+                <span className="detail-card-gu">{gu}</span>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        {/* 오른쪽 텍스트 영역 */}
+        <section className="detail-right">
+          <div className="detail-heading-row">
+            <h2 className="detail-heading">{place.name}</h2>
+            {place.link && (
+              <button
+                className="detail-link-btn"
+                onClick={() => window.open(place.link, "_blank")}
+              >
+                Link
+              </button>
+            )}
+          </div>
+
+          {/* 설명 박스 */}
+          <div className="detail-box">
+            <div className="detail-box-header">
+              <div className="detail-box-title">Title</div>
+              <button
+                type="button"
+                className={
+                  "detail-box-arrow-btn" + (expanded ? " expanded" : "")
+                }
+                onClick={() => setExpanded((prev) => !prev)}
+              >
+                !
+              </button>
+            </div>
+
+            <div
+              className={
+                "detail-box-body" + (expanded ? " expanded" : "")
+              }
+            >
+              {place.description ||
+                "설명이 준비 중입니다. 추후 이 장소에 대한 상세 설명이 들어갑니다."}
+            </div>
+          </div>
+
+          {/* 위치 / 가격 / 시간 */}
+          <div className="detail-meta">
+            <span className="detail-meta-item">위치 : {place.address}</span>
+          </div>
+          <div className="detail-meta">
+            <span className="detail-meta-item">가격 : {place.price}</span>
+          </div>
+          <div className="detail-meta">
+            <span className="detail-meta-item">시간 : {place.hours}</span>
+          </div>
+
+          {/* 카테고리 */}
+          <div className="detail-category-label">카테고리</div>
+          <div className="detail-tag-list">
+            {place.category &&
+              place.category.map((tag) => (
+                <span key={tag} className="tag-pill">
+                  #{tag}
+                </span>
+              ))}
+          </div>
+
+          <button
+            className="detail-calendar-btn"
+            onClick={() => {
+              if (place.link) window.open(place.link, "_blank");
+            }}
+          >
+            캘린더에 추가하기
           </button>
-        </form>
-
-        <p className="bottom-text">
-          아직 계정이 없나요?{" "}
-          <span className="bottom-link">회원가입은 나중에 추가될 예정이에요</span>
-        </p>
-      </div>
+        </section>
+      </main>
     </div>
   );
 }
 
-export default LoginPage;
+export default DetailPage;
