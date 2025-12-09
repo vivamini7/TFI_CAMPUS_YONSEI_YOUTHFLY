@@ -160,7 +160,7 @@ function DetailPage({ place, onBackToList, onBackToMap }) {
               if (place.link) window.open(place.link, "_blank");
             }}
           >
-            캘린더에 추가하기
+            자세히보기(추후에 기능을 추가할 예정입니다.)
           </button>
         </section>
       </main>
