@@ -1,0 +1,213 @@
+/* 전체 레이아웃 */
+.page {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* 노랑 + 갈색 그라데이션 배경 */
+  background-image: linear-gradient(
+    135deg,
+    #fff7e0 0%,
+    #ffe3aa 25%,
+    #f8d29a 50%,
+    #e1b88a 75%,
+    #c49a6a 100%
+  );
+  background-size: cover;
+
+  font-family: "Pretendard", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 햇살 느낌: 왼쪽 위에서 퍼지는 빛 + 살짝 레이 느낌 */
+.page-sun {
+  position: absolute;
+  top: -120px;
+  left: -80px;
+  width: 420px;
+  height: 420px;
+  pointer-events: none;
+
+  background-image:
+    /* 빛 번짐(동그란 햇살) */
+    radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.9), transparent 60%),
+    /* 햇살 레이(약간의 줄무늬 느낌) */
+    conic-gradient(
+      from -20deg,
+      rgba(255, 255, 255, 0.4),
+      transparent 15%,
+      transparent 35%,
+      rgba(255, 255, 255, 0.3),
+      transparent 55%,
+      transparent 75%,
+      rgba(255, 255, 255, 0.25),
+      transparent 100%
+    );
+  mix-blend-mode: screen;
+  opacity: 0.9;
+  filter: blur(1px);
+}
+
+/* 카드 영역 */
+.card {
+  position: relative;
+  z-index: 1;
+
+  width: 360px;
+  padding: 32px 28px 26px;
+
+  border-radius: 20px;
+  background: rgba(255, 252, 245, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  box-shadow: 0 18px 40px rgba(120, 53, 15, 0.35);
+  border: 1px solid rgba(250, 204, 21, 0.7);
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* 로고 영역 */
+.logo-wrap {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #7c3a12;
+}
+
+.logo-subtitle {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #a16207;
+}
+
+/* 폼 */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* 라벨 + 인풋 */
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: #78350f;
+}
+
+.input {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #f5d19a;
+  font-size: 14px;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.96);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease,
+    background-color 0.15s ease, transform 0.05s ease;
+}
+
+.input::placeholder {
+  color: #b0916c;
+  font-size: 13px;
+}
+
+.input:focus {
+  border-color: #fbbf24;
+  box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.45);
+  background-color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* 폼 하단: 체크박스 + 비밀번호 찾기 */
+.form-footer {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.remember {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #8b5a2b;
+}
+
+.remember input {
+  width: 14px;
+  height: 14px;
+}
+
+/* 비밀번호 찾기 버튼 */
+.link-button {
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 12px;
+  color: #b45309;
+  cursor: pointer;
+}
+
+.link-button:hover {
+  text-decoration: underline;
+}
+
+/* 로그인 버튼 */
+.button {
+  margin-top: 8px;
+  width: 100%;
+  padding: 11px 0;
+  border-radius: 999px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+
+  background: linear-gradient(135deg, #facc15, #eab308, #d97706);
+  color: #451a03;
+
+  box-shadow: 0 10px 22px rgba(146, 64, 14, 0.42);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.1s ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(146, 64, 14, 0.52);
+  filter: brightness(1.02);
+}
+
+.button:active {
+  transform: translateY(1px);
+  box-shadow: 0 6px 14px rgba(146, 64, 14, 0.35);
+}
+
+/* 카드 하단 텍스트 */
+.bottom-text {
+  margin-top: 18px;
+  font-size: 12px;
+  color: #8b5a2b;
+  text-align: center;
+}
+
+.bottom-link {
+  color: #b45309;
+}

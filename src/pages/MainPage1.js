@@ -3,6 +3,13 @@ import React, { useEffect, useRef } from "react";
 import places from "../data/data.json";
 import wingImg from "./wing.png";
 
+// 카드 썸네일용 이미지 경로 생성
+const getImageSrc = (name) => {
+  if (!name) return "/images/default.jpg";
+  const safeName = name; // 필요하면 파일명 가공 (공백 제거 등)
+  return `/images/${safeName}.jpg`;
+};
+
 function MainPage1({
   filters,
   onShowList,
@@ -10,12 +17,11 @@ function MainPage1({
   currentPage,
   onSelectPlace,
 }) {
-  // ✅ 다중 카테고리 고려
+  // ✅ 다중 카테고리 고려 (CategoryPage에서 넘어온 filters.categories)
   const selectedCategories = Array.isArray(filters?.categories)
     ? filters.categories
     : [];
 
-  // 👉 추천 리스트용 데이터 (filters 기준)
   // 👉 추천 리스트용 데이터 (filters 기준)
   const filteredPlaces = (places || [])
     .filter((item) => {
@@ -26,12 +32,9 @@ function MainPage1({
         selectedCategories.length === 0 ||
         selectedCategories.some((c) => category.includes(c));
 
-      return matchCategory;   // ⬅ 위치 조건 제거!
+      return matchCategory; // ⬅ 위치 조건 제거!
     })
     .sort((a, b) => (b.score || 0) - (a.score || 0));
-
-
-
 
   // 🔹 카카오 지도 ref들
   const mapContainerRef = useRef(null);
@@ -66,7 +69,7 @@ function MainPage1({
             );
             mapRef.current.setCenter(loc);
 
-            // 날개 마커 이미지 (public/images/wing-marker.png 준비!)
+            // 현위치 마커 이미지 (public/images/self-loc.png)
             const wingMarkerImage = new kakao.maps.MarkerImage(
               "/images/self-loc.png",
               new kakao.maps.Size(31, 31),
@@ -149,10 +152,11 @@ function MainPage1({
         }
       });
     });
-  }, [filteredPlaces, onSelectPlace]); // 필터 결과 바뀔 때마다 추천색만 다시 반영
+  }, [filteredPlaces, onSelectPlace]);
 
   return (
     <div className="main1-layout">
+      {/* 상단 바 */}
       <header className="main2-topbar">
         <div className="main2-topbar-left">
           <div className="main2-logo">
@@ -210,45 +214,64 @@ function MainPage1({
             )}
           </div>
 
+          {/* 👉 카드형 리스트 (MainPage2 스타일 재사용) */}
           <div className="main1-panel-list">
             {filteredPlaces.map((item, index) => {
               const gu = item.area
                 ? item.area.split(" ").find((x) => x.includes("구"))
                 : "";
 
+              const isTeen = item.teen === "T"; // 청소년 시설 여부
+              const imageSrc = getImageSrc(item.name);
+
               return (
-                <div
+                <article
                   key={index}
-                  className="main1-item"
+                  className="main2-card main1-card"
                   onClick={() => onSelectPlace && onSelectPlace(item)}
                   style={{ cursor: "pointer" }}
                 >
-                  <div className="main1-item-left">
-                    <span
-                      className="main1-star"
-                      style={{
-                        color: item.isFree ? "#FFD700" : "#CCCCCC",
-                      }}
-                    >
-                      {item.isFree ? "★" : "☆"}
-                    </span>
-                  </div>  
+                  {/* 이미지 영역 */}
+                  <div className="main2-card-img-wrap">
+                    {/* 청소년 시설일 때 노란 뱃지 */}
+                    {isTeen && (
+                      <div className="main2-card-teen-badge">
+                        #청소년용
+                      </div>
+                    )}
 
-                  <div className="main1-item-middle">
-                    <div className="main1-item-title">{item.name}</div>
-                    <div className="main1-item-desc">
-                      {gu && `${gu} · `} {item.price}
+                    <img
+                      src={imageSrc}
+                      alt={item.name}
+                      className="main2-card-img-placeholder"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "/images/default.jpg";
+                      }}
+                    />
+                  </div>
+
+                  {/* 텍스트 영역 */}
+                  <div className="main2-card-info">
+                    <div className="main2-card-row">
+                      <span className="main2-card-title ellipsis-title">
+                        {item.name}
+                      </span>
+                      <span className="main2-card-location">{gu}</span>
+                    </div>
+
+                    <div className="main2-card-row">
+                      <span className="main2-card-price ellipsis-price">
+                        {item.price}
+                      </span>
+                      <span className="main2-card-tag ellipsis-tags">
+                        {Array.isArray(item.tags)
+                          ? item.tags.join(" · ")
+                          : ""}
+                      </span>
                     </div>
                   </div>
-
-                  <div className="main1-item-right">
-                    {Array.isArray(item.category) && item.category.length > 0 && (
-                      <span className="main1-item-icon">
-                        #{item.category[0]}
-                      </span>
-                    )}
-                  </div>
-                </div>
+                </article>
               );
             })}
           </div>

@@ -94,7 +94,11 @@ function MainPage2({
       {/* 상단 바 */}
       <header className="main2-topbar">
         <div className="main2-topbar-left">
-          <div className="main2-logo">
+          <div
+            className="main2-logo"
+            onClick={onShowMap}   // 🔥 요걸로 변경!
+            style={{ cursor: "pointer" }}
+          >
             <span className="main2-logo-text">YouthFly</span>
             <img
               src={wingImg}
@@ -102,6 +106,8 @@ function MainPage2({
               className="main2-logo-wing"
             />
           </div>
+
+
         </div>
 
         <div className="main2-topbar-right">
